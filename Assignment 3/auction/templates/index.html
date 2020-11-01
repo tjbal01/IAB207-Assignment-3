@@ -1,0 +1,54 @@
+{% extends 'base.html'%}
+
+  {% block header %}
+     <!--Jumbotron-->
+     <div class="container">
+      <div class="row justify-content-center mt-5 pb-4">
+        <div class="col-md-8">
+          <div class="jumbotron shadow py-4 mb-5 ">
+            <h1 class="text-center">Search by Category</h1>
+            <form class="form-inline d-flex flex-nowrap" action="{{url_for('main.search')}}" >
+              <input type="text" name="search" class="form-control flex-grow-1 my-1 mr-sm-2" placeholder="search">
+              <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Submit</button>
+            </form>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+      {% endblock %}
+    
+  
+
+      {% block content %}
+    <div class="container">
+         
+        <div class="row mt-5 mb-5 justify-content-center">
+          <div class="col-md-10">
+            <div class="media border p-3">
+              <img class="align-self-center mr-3" style="max-width: 120px" src="http://clipart-library.com/img/991888.png" alt="Book">
+              <div class="align-self-center media-body">
+                <h5 class="mt-0">Buy or sell books</h5>
+                <p class="d-none d-sm-block">Join now to register as a new user and take advantage of all of the site features.</p>
+                <a href="{{url_for('authentication.register')}}" class="btn btn-primary">Join Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <div class="card-deck mb-3">
+          {% for book in books %}
+          <div class="card">
+            <img class="card-img-top" src="{{book.image}}" alt="{{book.name}}">
+            <div class="card-body">
+              <h5 class="card-title">{{book.name}}</h5>
+              <p class="card-text">{{book.description}}</p>
+              <a href="{{url_for('book.show', id=book.id)}}" class="btn btn-secondary mb-2">View Details</a>
+              <a href="{{url_for('book.show', id=book.id)}}" class="btn btn-secondary ml-4 mb-2">Add to Watchlist</a>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endblock %}

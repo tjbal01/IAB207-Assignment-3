@@ -1,0 +1,57 @@
+{% extends 'base.html'%}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+<div class="container">  
+    <div class="row mt-5 mb-3">  
+      <div class="col-md-12">  
+        <div class="float-left">  
+          <h1 class="mb-0">{{ book.name }}</h1>  
+          <p>Popular Book</p> 
+        </div>  
+ 
+        <div class="float-right text-right">  
+          <p class="mb-0">Starting Price:</p>  
+          <h2 id="exchange-rate">${{ book.price }}</h1>  
+            
+        </div>  
+      </div>  
+    </div>  
+ 
+    <!-- Book --> 
+    <div class="row">  
+      <div class="col-md-12">  
+        <div class="card my-3">  
+          <div class="card-body">  
+            <div class="media">  
+              <img class="align-self-start mr-3" src="{{book.image}}" alt="{{book.name}}" style="max-width: 250px;">  
+              <div class="media-body">  
+               
+                <h5 class="mt-0">{{ book.name }}</h5> 
+                <small class="mb-5 font-weight-bold text-muted">Category: {{book.category}}</small>   
+                <p>{{ book.description }}</p>  
+                <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Add to Watchlist</button>
+              </form>
+                {{wtf.quick_form(form, "/books/{0}/bid".format(book.id))}}
+    
+    
+                {% for bid in book.bids %}
+                <div class="row border-bottom">  
+                  <div class="col-md-12">  
+                    <b>{{ bid.user.name }} <span class="ml-2  text-muted">{{ bid.created_at }}</span></b>  
+                    <p>{{ bid.text }}</p>  
+                  </div>  
+                </div>  
+                {% endfor %}
+              </div>  
+            </div>  
+          </div>  
+        </div>  
+      </div>  
+    </div>     
+ 
+   
+ 
+   
+
+{% endblock %}
